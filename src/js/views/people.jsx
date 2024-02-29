@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect} from "react";
 import { useStarWarsContext } from "../store/appContext";
 
 const PeopleView = () => {
@@ -17,8 +17,8 @@ const PeopleView = () => {
                 {people.name}
                 {people.gender}
                 {people.eyecolor}
-                <button onClick={() => actions.navigateToDetail(people.id)}>Learn More</button>
-                <button onClick={() => actions.addFavorites(people.id)}>Add to Favorites</button>
+                <button onClick={() => actions.navigateToDetail(people,id)}>Learn More</button>
+                <button onClick={() => actions.addFavorites(people,id)}>Add to Favorites</button>
             </li>
         ))}
     </ul>
@@ -26,4 +26,4 @@ const PeopleView = () => {
 );
 };
 
-export default VehiclesView;
+export default PeopleView;

@@ -6,7 +6,7 @@ const StarWarsContext = createContext();
 export const useStarWarsContext = () => useContext(StarWarsContext);
 
 export const StarWarsProvider = ({ children }) => {
-  const [state, setState] = useState({});
+  const [state, setState,actions] = useState({});
 
   useEffect(() => {
     const stateObject = getState({
@@ -17,7 +17,7 @@ export const StarWarsProvider = ({ children }) => {
   }, []);
 
   return (
-    <StarWarsContext.Provider value={{ state, setState }}>
+    <StarWarsContext.Provider value={{ state, setState,actions }}>
       {children}
     </StarWarsContext.Provider>
   );

@@ -8,14 +8,10 @@ const DetailsView = () => {
     const { state } = useStore();
     const [itemDetails, setItemDetails] = useState(null);
 
-    useEffect(() => {
-        const details = actions.getItemDetailsById(itemType, id, state);
-        setItemDetails(details);
-    }, [itemType, id, state]);
-
-    if (!itemDetails) {
-        return <div>Loading...</div>;
-    }
+    useEffect(()=>
+    {
+     actions.getData(type,id)
+    },[type,id]
 
     return (
         <div>

@@ -7,9 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites:[]
         },
         actions: {
-            getData: async (id) => {
+            getData: async (type,id) => {
                 try {
-                    const response = await fetch('https://www.swapi.tech/api/{id}');
+                    const response = await fetch(`https://www.swapi.tech/api/${type}/${id}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch people');
                     }
@@ -55,17 +55,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error fetching planets:', error);
                 }
             },
-            addFavorites: async () => {
+            addFavorites: async (type, id) => {
                 try {
-                    const response = await fetch('https://www.swapi.tech/api/{id}', {
+                    const response = await fetch(`https://www.swapi.tech/api/${type}/${id}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify()
+                        body: JSON.stringify({})
                     });
                     if (!response.ok) {
-                        throw new Error('Failed to get data');
+                        throw new Error('Failed to add favorite');
                     }
                     const addedFavorite = await response.json();
                     setStore(prevStore => ({
@@ -75,9 +75,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error adding to favorites:', error);
                 }
             },
-            removeFavorites: async () => {
+            removeFavorites: async (type,id) => {
                 try {
-                    const response = await fetch('https://www.swapi.tech/api/{id}', {
+                    const response = await fetch(`https://www.swapi.tech/api/${type}/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json'
@@ -95,33 +95,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error removing selection:', error);
                 }
             },
-            getItemDetailsById:  (itemType, itemId, state) => {
-                switch (itemType) {
-                    case 'people':
-                        return state.people.find(person => person.id === itemId);
-                    case 'vehicles':
-                        return state.vehicles.find(vehicle => vehicle.id === itemId);
-                    case 'planets':
-                        return state.planets.find(planet => planet.id === itemId);
-                    default:
-                        return null;
+            navigateToDetails: async (type,id) => {
+                try {
+                    const response = await fetch 
                 }
-            },
-            navigateToDetails: (id) => {
-                // Determine the URL based on the item type
-                let url;
-                switch (id) {
-                    case 'people':
-                        url = `/people/${people.id}`;
-                        break;
-                    case 'vehicles':
-                        url = `/vehicles/${vehicles.id}`;
-                        break;
-                    case 'planets':
-                        url = `/planets/${planets.id}`;
-                        break;
-                    default:
-                        url = '/';
+                // let url;
+                // switch (id) {
+                //     case 'people':
+                //         url = `/people/${people.id}`;
+                //         break;
+                //     case 'vehicles':
+                //         url = `/vehicles/${vehicles.id}`;
+                //         break;
+                //     case 'planets':
+                //         url = `/planets/${planets.id}`;
+                //         break;
+                //     default:
+                //         url = '/';
                 }
             
                 // Navigate to the detailed view

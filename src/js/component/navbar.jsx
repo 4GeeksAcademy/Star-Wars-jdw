@@ -1,27 +1,29 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { StarWarsContext } from "../store/appContext"; // Import the StarWarsContext
+import { StarWarsContext } from "../store/appContext";
 
 export const Navbar = () => {
-    const { state, actions } = useContext(StarWarsContext); // Use the useContext hook to access state and actions
-
-    // Function to handle "Add to Favorites" button click event
-    const addToFavorites = () => {
-        // Call the addFavorites action
-        actions.addFavorites(/* Pass any necessary parameters */);
-    };
+    const { state } = useContext(StarWarsContext);
 
     return (
         <nav className="navbar navbar-light bg-light mb-3">
             <Link to="/">
                 <h1>Star Wars Icon</h1>
             </Link>
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="favorites" data-bs-toggle="dropdown" aria-expanded="false">
-    			Favorites {favorites.length}
-  			</button>
-			  <ul class="dropdown-menu" aria-labelledby="favorites">
-    			<li><a class="dropdown-item" href="{}"></a></li>
-			  </ul>
+            <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="favoritesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Favorites ({state.favorites.length})
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="favoritesDropdown">
+                    {state.favorites.map(item => (
+                        <li key={item.id}>
+                            <Link className="dropdown-item" to={`/details/${item.id}`}>
+                                {item.name}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </nav>
     );
 };

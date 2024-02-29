@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useStarWarsContext } from './context';
+import { useStarWarsContext } from '../store/appContext';
 import PeopleView from './people';
 import PlanetsView from './planets';
 import VehiclesView from './vehicles';
